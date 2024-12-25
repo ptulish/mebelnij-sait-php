@@ -16,34 +16,121 @@
         <img src="assets/logo_jantexport_ou.png" alt="Логотип" />
     </div>
     <nav class="nav">
-        <button class="nav-btn">About us</button>
-        <button class="nav-btn">Gallery</button>
-        <button class="nav-btn">Contacts</button>
-        <button class="nav-btn">Ask us!</button>
+        <a href="#about-us" class="nav-btn">About us</a>
+        <a href="#gallery" class="nav-btn">Gallery</a>
+        <a href="#contacts" class="nav-btn">Contacts</a>
+        <a href="#ask-us" class="nav-btn">Ask us!</a>
     </nav>
 </header>
 
 <section class="hero" id="hero">
     <div class="hero-text">
-        <h1>Furniture for office, home, and kitchen</h1>
+        <h1>Furniture for office, home and kitchen</h1>
         <p>Bringing style, comfort, and quality to your life!</p>
     </div>
 </section>
 
 <!-- Основная часть страницы -->
 <main>
-    <section>
-        <h2>Раздел 1</h2>
-        <p>Содержимое раздела 1.</p>
-        <p>Прокрути страницу, чтобы посмотреть работу хедера.</p>
+    <section id="about-us">
+        <h2>About us</h2>
+        <p>Yantexport OU has been successfully operating in the European furniture market, offering a carefully curated selection of furniture from leading Italian, French, and German brands worldwide. We provide furniture for the home, kitchen, and office.<br><br>
+
+        We strive to satisfy every taste by offering our clients furniture in a range of styles—luxurious classics, modern, sophisticated Art Deco, Luxury, and of course, the ever-popular eco style. Our wide assortment, meticulously selected collections, direct manufacturer pricing, in-depth industry knowledge, professional design consultations, and personalized service ensure an exceptional experience for every customer.</p>
+        <!-- Новый контейнер для трёх блоков -->
+        <div class="info-blocks">
+            <div class="info-block">
+                <h3>Uncompromising Quality</h3>
+                <p>We select furniture made from the finest materials and employ modern design standards to guarantee our customers only receive products of the highest caliber.</p>
+            </div>
+            <div class="info-block">
+                <h3>Professional Expertise</h3>
+                <p>We do more than just sell furniture. We offer harmonious combinations of style and functionality, staying informed about the latest global design trends to guide you toward the perfect choice.</p>
+            </div>
+            <div class="info-block">
+                <h3>Extensive Experience</h3>
+                <p>Our long-standing relationships with top manufacturers let us provide a wide assortment of furniture directly—saving you time, eliminating extra costs, and delivering optimal value.</p>
+            </div>
+        </div>
     </section>
-    <section>
-        <h2>Раздел 2</h2>
-        <p>Содержимое раздела 2.</p>
+    <!-- Единая секция -->
+    <section class="gallery" id="gallery">
+        <div onclick="toggleCarousel(1)" class="gallery-header">
+            <h2>Office Furniture – Comfort and Efficiency</h2>
+            <svg class="arrow-down" width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10l5 5 5-5H7z" fill="currentColor"/>
+            </svg>
+        </div>
+        <div id="carousel-1" class="carousel">
+            <p class="carousel-text">We’ll help you select ergonomic and stylish office furniture to make your workspace comfortable and productive.</p>
+            <div class="carousel-wrapper">
+                <button class="carousel-button left" onclick="scrollCarouselLeft()">&#8249;</button>
+                <div class="carousel-images officeGal"></div>
+                <button class="carousel-button right" onclick="scrollCarouselRight()">&#8250;</button>
+            </div>
+        </div>
+
+        <div onclick="toggleCarousel(2)" class="gallery-header">
+            <h2>Home Furniture – Cozy and Stylish in Every Detail</h2>
+            <svg class="arrow-down" width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10l5 5 5-5H7z" fill="currentColor"/>
+            </svg>
+        </div>
+        <div id="carousel-2" class="carousel">
+            <p class="carousel-text">We assist in selecting furniture that makes your bedroom and living room comfortable, functional, and harmonious.</p>
+            <button class="carousel-button left" onclick="scrollCarouselLeft()">&#8249;</button>
+            <div class="carousel-images homeGal"></div>
+            <button class="carousel-button right" onclick="scrollCarouselRight()">&#8250;</button>
+        </div>
+
+        <div onclick="toggleCarousel(3)" class="gallery-header">
+            <h2>Kitchen – The Heart of Your Home</h2>
+            <svg class="arrow-down" width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10l5 5 5-5H7z" fill="currentColor"/>
+            </svg>
+        </div>
+        <div id="carousel-3" class="carousel">
+            <p class="carousel-text">We help you choose stylish and functional kitchen furniture to create comfort and coziness in your home.</p>
+            <button class="carousel-button left" onclick="scrollCarouselLeft()">&#8249;</button>
+            <div class="carousel-images kitchenGal"></div>
+            <button class="carousel-button right" onclick="scrollCarouselRight()">&#8250;</button>
+        </div>
     </section>
-    <section>
-        <h2>Раздел 3</h2>
-        <p>Содержимое раздела 3.</p>
+
+    <section id="contacts" class="contacts">
+        <!-- Левая часть с контактной информацией -->
+        <div class="contact-info">
+            <h2>Contact Info</h2>
+            <p class="contact-info-details"><strong>Company Name:</strong> Placeholder Co.</p>
+            <p class="contact-info-details"><strong>Phone:</strong> +1 (123) 456-7890</p>
+            <p class="contact-info-details"><strong>Email:</strong> contact@placeholder.com</p>
+            <p class="contact-info-details"><strong>Address:</strong> 123 Main Street, Springfield, USA</p>
+        </div>
+
+        <!-- Правая часть - мини-карта -->
+        <div class="contact-map">
+            <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.8360226261906!2d-122.41941608468198!3d37.77492957975908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064c2a092ab%3A0x4c2a4b4db370210f!2s123+Main+St%2C+San+Francisco%2C+CA+94105%2C+USA!5e0!3m2!1sen!2sru!4v1698765432101!5m2!1sen!2sru"
+                    width="100%"
+                    height="100%"
+                    style="border: 0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </section>
+    <section id="ask-us">
+        <h2>Ask Us!</h2>
+        <form action="send_email.php" method="POST" class="ask-us-form">
+            <label for="name">Имя</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Сообщение</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Отправить</button>
+        </form>
     </section>
 </main>
 

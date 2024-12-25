@@ -63,3 +63,65 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(changeBackground, 5000);
 });
 
+function toggleCarousel(sectionId) {
+    // Получаем все карусели
+    const carousels = document.querySelectorAll('.carousel');
+
+    // Перебираем карусели и скрываем их, если они неактивны
+    carousels.forEach((carousel, index) => {
+        if (index === sectionId - 1) {
+            carousel.classList.toggle('active'); // Переключение активности
+        } else {
+            carousel.classList.remove('active'); // Убираем лишнюю открытую карусель
+        }
+    });
+}
+
+const carousel = document.querySelector('.carousel-images');
+// Создание массива путей к изображениям
+const imagePathsOffice = Array.from({ length: 23 }, (_, index) => `./assets/office-photos/g-office-${index}.jpg`);
+const imagePathsKitchen = Array.from({ length: 1 }, (_, index) => `assets/kitchen-photos/g-kitchen-${index}.jpeg`);
+const imagePathsHome = Array.from({ length: 25 }, (_, index) => `assets/living-photos/g-living-${index}.jpeg`);
+
+
+
+// Функция для случайной сортировки массива
+const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
+
+// Перемешиваем массив путей
+const shuffledImagesOffice = shuffleArray(imagePathsOffice);
+const shuffledImagesKitchen = shuffleArray(imagePathsKitchen);
+const shuffledImagesHome = shuffleArray(imagePathsHome);
+
+
+// Генерация HTML-кода для случайно упорядоченных изображений
+const carouselImagesContainerOffice = document.querySelector('.officeGal');
+carouselImagesContainerOffice.innerHTML = shuffledImagesOffice
+    .map((src) => `<div class="image-container"><img src="${src}" alt="Office Photo"></div>`)
+    .join('');
+
+const carouselImagesContainerKitchen = document.querySelector('.kitchenGal');
+carouselImagesContainerKitchen.innerHTML = shuffledImagesKitchen
+    .map((src) => `<div class="image-container"><img src="${src}" alt="Kitchen Photo"></div>`)
+    .join('');
+
+const carouselImagesContainerHome = document.querySelector('.homeGal');
+carouselImagesContainerHome.innerHTML = shuffledImagesHome
+    .map((src) => `<div class="image-container"><img src="${src}" alt="Living room Photo"></div>`)
+    .join('');
+
+// Прокрутка влево
+function scrollCarouselLeft() {
+    carousel.scrollBy({
+        left: -carousel.offsetWidth / 2, // Прокрутка на половину ширины видимой области
+        behavior: 'smooth' // Для анимированной прокрутки
+    });
+}
+
+// Прокрутка вправо
+function scrollCarouselRight() {
+    carousel.scrollBy({
+        left: carousel.offsetWidth / 2,
+        behavior: 'smooth'
+    });
+}

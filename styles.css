@@ -5,8 +5,13 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: sans-serif;
+    font-weight: 550;
     color: #333;
     background-image: url('./assets/wood-background.png');
     background-position: center; /* центрируем изображение */
@@ -14,9 +19,6 @@ body {
     background-size: cover;
 }
 
-main{
-    padding: 2rem 1rem;
-}
 /* 1. Базовый стиль хедера */
 .header {
     /* Пусть будет позиция фиксированная, чтобы всегда оставался наверху */
@@ -61,6 +63,18 @@ main{
     cursor: pointer;
     font-weight: 500;
     font-size: 1.5rem;
+    display: inline-block;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    text-decoration: none; /* Убираем стандартное подчеркивание ссылки */
+    color: rgb(130,84,53); /* Цвет текста */
+    border-radius: 5px; /* Закруглённые края */
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.nav-btn:hover {
+    background-color: mintcream; /* Более тёмный цвет при наведении */
 }
 
 .hero {
@@ -83,7 +97,7 @@ main{
 
 .hero-text {
     position: absolute;
-    top: 70%;
+    top: 80%;
     left: 20%;
     transform: translate(-50%, -50%);
     color: #000;
@@ -94,15 +108,16 @@ main{
     border-radius: 10px;
 }
 
-/* 3. Основная часть (пример) */
 main {
-    padding: 2rem 1rem;
-    margin-top: 80px; /* Чтобы контент не залезал под фиксированный хедер */
+    margin: 0 2rem 0 2rem;
 }
 
 section {
     margin-bottom: 2rem;
-    height: 20rem;
+    height: auto;
+    background-color: rgba(128, 128, 128, 0.15);
+    border-radius: 10px;
+    padding: 5rem;
 }
 
 h2 {
@@ -115,4 +130,189 @@ h2 {
     text-align: center;
     background-color: #f8f8f8;
     font-size: 0.9rem;
+}
+
+/* Контейнер для трёх блоков */
+.info-blocks {
+    display: flex; /* Располагаем элементы в ряд */
+    justify-content: space-between; /* Равномерное распределение */
+    gap: 1rem; /* Расстояние между блоками */
+    margin-top: 2rem; /* Отступ сверху от параграфа */
+}
+
+/* Отдельный блок */
+.info-block {
+    flex: 1; /* Все элементы равной ширины */
+    padding: 1rem;
+    background-color: rgba(130,84,53, 0.7);
+    border-radius: 8px; /* Скругленные углы */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для визуальной отделённости */
+    text-align: center; /* Центрирование содержимого */
+}
+
+.info-block h3 {
+    margin-bottom: 0.5rem;
+}
+
+.info-block p {
+    color: white;
+    line-height: 1.5;
+}
+
+h1 {
+    font-family: Playfair Display, serif;
+    font-size: 30px;
+}
+
+h2 {
+    font-family: Playfair Display, serif;
+    font-size: 30px;
+}
+
+h3 {
+    font-family: Playfair Display, serif;
+    font-size: 30px;
+}
+
+p {
+    font-family: opensans, sans-serif;
+    font-size: 18px;
+}
+
+.gallery {
+    margin: 20px 0;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.carousel {
+    display: none; /* Изначально скрыта */
+    padding: 1rem 1rem;
+    overflow: hidden;
+}
+.carousel-text {
+    margin-bottom: 20px; /* Отступ между текстом и изображениями */
+    color: #333; /* Цвет текста */
+}
+
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-images {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.carousel-images::-webkit-scrollbar {
+    display: none; /* Скрыть скроллбар */
+}
+
+.carousel.active {
+    display: flex; /* Показываем при активации */
+    gap: 10px;
+    flex-direction: column;
+}
+
+.image-container {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 200px;
+    border-radius: 5px;
+}
+
+.image-container img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    vertical-align: middle;
+    border-radius: 1rem;
+}
+
+.gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+
+.gallery-header h2 {
+    margin: 0;
+}
+
+.arrow-down {
+    width: 2rem;
+    height: 2rem;
+    color: #000; /* Цвет стрелки */
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.carousel-button {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    user-select: none;
+}
+
+.carousel-button.left {
+    left: 5px;
+}
+
+.carousel-button.right {
+    right: 5px;
+}
+
+.carousel-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.contacts {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.contact-info {
+    max-width: 50%;
+
+}
+
+.contact-info-details {
+    padding: 0.5rem 0;
+}
+
+.contact-map {
+    width: 45%;
+    height: 300px;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.ask-us-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
