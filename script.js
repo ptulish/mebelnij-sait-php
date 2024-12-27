@@ -1,13 +1,3 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//     const aboutUsBtn = document.querySelector('.nav-btn:nth-child(1)');
-//     const section1 = document.getElementById('section1');
-//
-//     if (aboutUsBtn && section1) {
-//         aboutUsBtn.addEventListener('click', () => {
-//             section1.scrollIntoView({ behavior: 'smooth' });
-//         });
-//     }
-// });
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('main-header');
     const hero = document.getElementById('hero');
@@ -125,3 +115,67 @@ function scrollCarouselRight() {
         behavior: 'smooth'
     });
 }
+
+document.querySelectorAll('.nav-btn').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+            const headerHeight = document.querySelector('header').offsetHeight; // Высота хедера
+            const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+            const offsetPosition = elementPosition - headerHeight;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+
+// Получаем элементы
+const burgerMenu = document.getElementById('burger-menu');
+const navMenu = document.getElementById('nav-menu');
+
+// Обработчик клика по бургер-меню
+burgerMenu.addEventListener('click', () => {
+    navMenu.classList.toggle('visible'); // Показывает/скрывает меню
+    navMenu.classList.toggle('hidden'); // Меняет класс с hidden на visible
+});
+
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // Предотвращаем стандартное поведение формы (переход на другую страницу)
+
+    // Собираем данные формы
+    let formData = new FormData(this);
+
+    // Отправляем данные с помощью fetch API
+    fetch("./send_email.php", {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => response.text()) // Получаем ответ от сервера (в формате текста)
+        .then((data) => {
+            // Отображаем сообщение об успехе или ошибке
+            let notification = document.getElementById("notification");
+            notification.style.display = "block";
+            notification.style.color = data.includes("Ваше сообщение успешно отправлено") ? "green" : "red";
+            notification.innerText = data;
+
+            // Очищаем форму, если данные успешно отправлены
+            if (data.includes("Ваше сообщение успешно отправлено")) {
+                document.getElementById("contactForm").reset();
+            }
+        })
+        .catch((error) => {
+            // Показываем сообщение об ошибке
+            let notification = document.getElementById("notification");
+            notification.style.display = "block";
+            notification.style.color = "red";
+            notification.innerText = "Ошибка отправки: " + error.message;
+        });
+});

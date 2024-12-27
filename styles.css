@@ -27,6 +27,7 @@ body {
     left: 0;
     width: 100%;
     z-index: 999;
+    height: 5.3rem;
 
     /* Прозрачный фон по умолчанию */
     background-color: rgba(255, 255, 255, 0.6);
@@ -38,6 +39,74 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0.1rem 5rem;
+}
+
+
+/* Бургер-меню */
+.burger-menu {
+    display: none; /* Скрыто по умолчанию */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.burger-menu span {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #000; /* Цвет полосок */
+    border-radius: 2px;
+}
+
+
+/* Скрытие навигации для мобильных устройств */
+.nav {
+    transition: all 0.3s ease-in-out;
+}
+
+.nav.hidden {
+    display: none; /* При скрытом состоянии */
+}
+
+.nav.visible {
+    display: flex !important; /* Показывается (для мобильных устройств) */
+    flex-direction: column; /* Вертикальное отображение */
+    gap: 10px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+/* Для экранов до 768px */
+@media (max-width: 768px) {
+    .burger-menu {
+        display: flex; /* Показываем бургер */
+    }
+
+    /* Скрываем навигацию по умолчанию */
+    .nav {
+        display: none !important;
+    }
+
+    .logo img {
+        height: 40px; /* Уменьшаем логотип */
+    }
+
+    .nav-btn {
+        font-size: 14px;
+    }
+
+    .header {
+        flex-wrap: nowrap;
+    }
 }
 
 /* Класс, который будем подставлять скриптом, когда проскроллили */
@@ -181,9 +250,9 @@ p {
 
 .gallery {
     margin: 20px 0;
-    padding: 2rem;
     border: 1px solid #ddd;
     border-radius: 5px;
+    padding: 5rem;
 }
 
 .carousel {
@@ -246,7 +315,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 1rem 0rem;
 }
 
 .gallery-header h2 {
@@ -292,7 +361,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 20px;
+    padding: 5rem;
 }
 
 .contact-info {
@@ -333,4 +402,113 @@ p {
     width: 30%;
     margin-left: auto;
     margin-right: auto;
+
+}
+
+.form-form {
+    padding: 0;
+}
+
+.gallery-section-header {
+    width: 100%;
+    horiz-align: center;
+}
+
+.about-us-textblock{
+    text-align: justify;
+}
+
+/* Блок по умолчанию (для широких экранов) */
+.info-blocks {
+    display: flex; /* Показывать на широких экранах */
+}
+
+.info-blocks-small {
+    display: none; /* Скрыть на широких экранах */
+}
+
+/* Медиазапрос для экранов шириной менее 860px */
+@media (max-width: 860px) {
+    .info-blocks {
+        display: none; /* Скрыть стандартный блок */
+    }
+
+    .info-blocks-small {
+        display: block; /* Показать альтернативный блок */
+    }
+}
+
+.adv-btn {
+    background-color: rgba(192, 192, 192, 0.6) !important;
+}
+
+/* Медиа-запрос для экранов до 1100px */
+@media (max-width: 1100px) {
+    .header {
+        padding: 0.1rem 2rem;
+        height: 80px; /* Уменьшенная высота хедера */
+    }
+
+    .logo img {
+        height: 50px; /* Уменьшение логотипа */
+    }
+
+    .nav-btn {
+        font-size: 16px; /* Уменьшение текста кнопок */
+    }
+}
+
+/* Медиа-запрос для экранов до 768px */
+@media (max-width: 768px) {
+    .header {
+        display: flex;
+        flex-direction: row; /* Хедер становится вертикальным */
+        align-items: center;
+        padding: 0.2rem 2rem;
+        height: auto; /* Высота адаптируется под контент */
+    }
+
+    .logo img {
+        height: 40px; /* Еще меньше логотип */
+    }
+
+    .nav {
+        flex-direction: column; /* Вертикальное выравнивание ссылок */
+        gap: 10px;
+    }
+
+    .nav-btn {
+        font-size: 14px; /* Размер шрифта кнопок еще меньше */
+    }
+}
+
+
+
+@media (max-width: 1650px) {
+    .hero-text {
+        position: absolute;
+        top: 80%;
+        left: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 20px; /* Уменьшенные отступы */
+        text-align: center; /* Центрирование текста */
+        height: 30vh;
+    }
+
+    .hero-text h1 {
+        font-size: 1.5rem; /* Уменьшить размер заголовка */
+    }
+
+    .hero-text p {
+        font-size: 1rem; /* Уменьшить размер текста */
+    }
+    .hero-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
 }

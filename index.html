@@ -7,6 +7,7 @@
 
     <!-- Подключение стилей -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="bootstrap.css">
 </head>
 <body>
 
@@ -15,7 +16,13 @@
     <div class="logo">
         <img src="assets/logo_jantexport_ou.png" alt="Логотип" />
     </div>
-    <nav class="nav">
+    <button class="burger-menu" id="burger-menu">
+        <!-- Иконка бургера -->
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <nav class="nav" id="nav-menu">
         <a href="#about-us" class="nav-btn">About us</a>
         <a href="#gallery" class="nav-btn">Gallery</a>
         <a href="#contacts" class="nav-btn">Contacts</a>
@@ -34,7 +41,7 @@
 <main>
     <section id="about-us">
         <h2>About us</h2>
-        <p>Yantexport OU has been successfully operating in the European furniture market, offering a carefully curated selection of furniture from leading Italian, French, and German brands worldwide. We provide furniture for the home, kitchen, and office.<br><br>
+        <p class="about-us-textblock">Yantexport OU has been successfully operating in the European furniture market, offering a carefully curated selection of furniture from leading Italian, French, and German brands worldwide. We provide furniture for the home, kitchen, and office.<br><br>
 
         We strive to satisfy every taste by offering our clients furniture in a range of styles—luxurious classics, modern, sophisticated Art Deco, Luxury, and of course, the ever-popular eco style. Our wide assortment, meticulously selected collections, direct manufacturer pricing, in-depth industry knowledge, professional design consultations, and personalized service ensure an exceptional experience for every customer.</p>
         <!-- Новый контейнер для трёх блоков -->
@@ -52,9 +59,42 @@
                 <p>Our long-standing relationships with top manufacturers let us provide a wide assortment of furniture directly—saving you time, eliminating extra costs, and delivering optimal value.</p>
             </div>
         </div>
+        <div class="info-blocks-small">
+            <!-- Альтернативная разметка для небольших экранов -->
+            <p class="d-inline-flex gap-1">
+                <a class="btn adv-btn" data-bs-toggle="collapse" href="#advantagesCollapse1" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Uncompromising Quality
+                </a>
+                <a class="btn adv-btn" data-bs-toggle="collapse" href="#advantagesCollapse2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Professional Expertise
+                </a>
+                <a class="btn adv-btn" data-bs-toggle="collapse" href="#advantagesCollapse3" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Extensive Experience
+                </a>
+            </p>
+            <div class="collapse" id="advantagesCollapse1">
+                <div class="card card-body">
+                    <h3>Uncompromising Quality</h3>
+                    <p>We select furniture made from the finest materials and employ modern design standards to guarantee our customers only receive products of the highest caliber.</p>
+                </div>
+            </div>
+            <div class="collapse" id="advantagesCollapse2">
+                <div class="card card-body">
+                    <h3>Professional Expertise</h3>
+                    <p>We do more than just sell furniture. We offer harmonious combinations of style and functionality, staying informed about the latest global design trends to guide you toward the perfect choice.</p>
+                </div>
+            </div>
+            <div class="collapse" id="advantagesCollapse3">
+                <div class="card card-body">
+                    <h3>Extensive Experience</h3>
+                    <p>Our long-standing relationships with top manufacturers let us provide a wide assortment of furniture directly—saving you time, eliminating extra costs, and delivering optimal value.</p>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- Единая секция -->
     <section class="gallery" id="gallery">
+        <h2 class="gallery-section-header">Gallery</h2>
         <div onclick="toggleCarousel(1)" class="gallery-header">
             <h2>Office Furniture – Comfort and Efficiency</h2>
             <svg class="arrow-down" width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -122,19 +162,28 @@
     </section>
     <section id="ask-us">
         <h2>Ask Us!</h2>
-        <form action="./send_email.php" method="POST" class="ask-us-form">
-            <div class="form-group">
-                <label for="name">Name and Surename</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required class="form-message"></textarea>
-            <button class="form-button" type="submit">Send</button>
-        </form>
+        <div class="form-form">
+            <form action="./send_email.php" method="POST" class="ask-us-form" id="contactForm">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name and Surename</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="John Smith">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="New order">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message:</label>
+                    <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-secondary form-button" id="sendButton">Send!</button>
+                <div id="notification" style="display: none; margin-top: 10px; color: green;"></div>
+            </form>
+        </div>
     </section>
 </main>
 
@@ -145,5 +194,6 @@
 
 <!-- Подключение скриптов -->
 <script src="script.js"></script>
+<script src="bootstrap.js"></script>
 </body>
 </html>
