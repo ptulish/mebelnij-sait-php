@@ -7,18 +7,24 @@
 
 html {
     scroll-behavior: smooth;
+
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Figtree', serif;
     font-weight: 550;
     color: #333;
     background-image: url('./assets/wood-background.png');
-    background-position: center; /* центрируем изображение */
-    background-repeat: no-repeat; /* исключаем повторение изображения */
-    background-size: cover;
+    background-attachment: fixed;
+}
+/* Когда хотим "спрятать" секцию для плавной смены */
+body.fade-out {
+    opacity: 0;
 }
 
+.wood-background{
+    background-image: url('./assets/wood-background.png');
+}
 /* 1. Базовый стиль хедера */
 .header {
     /* Пусть будет позиция фиксированная, чтобы всегда оставался наверху */
@@ -41,7 +47,6 @@ body {
     padding: 0.1rem 5rem;
 }
 
-
 /* Бургер-меню */
 .burger-menu {
     display: none; /* Скрыто по умолчанию */
@@ -61,7 +66,6 @@ body {
     background-color: #000; /* Цвет полосок */
     border-radius: 2px;
 }
-
 
 /* Скрытие навигации для мобильных устройств */
 .nav {
@@ -159,15 +163,12 @@ body {
 }
 
 
-/* Когда хотим "спрятать" секцию для плавной смены */
-.hero.fade-out {
-    opacity: 0;
-}
+
 
 .hero-text {
     position: absolute;
-    top: 80%;
-    left: 20%;
+    top: 70%;
+    left: 25%;
     transform: translate(-50%, -50%);
     color: #000;
     text-align: center;
@@ -177,14 +178,19 @@ body {
     border-radius: 10px;
 }
 
+@media (max-width: 1000px) {
+    .hero-text{
+        top: 50%;
+        left: 50%;
+    }
+}
+
 main {
-    margin: 0 2rem 0 2rem;
+    margin: 0;
 }
 
 section {
-    margin-bottom: 2rem;
     height: auto;
-    background-color: rgba(128, 128, 128, 0.15);
     border-radius: 10px;
     padding: 5rem;
 }
@@ -213,7 +219,7 @@ h2 {
 .info-block {
     flex: 1; /* Все элементы равной ширины */
     padding: 1rem;
-    background-color: rgba(192,192,192, 0.6);
+    background-color: rgba(130, 84, 53, 1); /* Цвет фона */
     border-radius: 8px; /* Скругленные углы */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для визуальной отделённости */
     text-align: center; /* Центрирование содержимого */
@@ -221,11 +227,21 @@ h2 {
 
 .info-block h3 {
     margin-bottom: 0.5rem;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
 .info-block p {
-    color: black;
+    color: white;
     line-height: 1.5;
+    font-weight: 500;
+    padding-bottom: 2rem;
+}
+
+.info-block img {
+    margin: 2rem 0;
+    height: 30%;
 }
 
 h1 {
@@ -249,10 +265,13 @@ p {
 }
 
 .gallery {
-    margin: 20px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 5rem;
+}
+
+.margin-section{
+    margin: 2rem 1rem;
 }
 
 .carousel {
@@ -304,7 +323,7 @@ p {
 
 .image-container img {
     display: block;
-    width: 100%;
+    width: auto;
     height: 100%;
     object-fit: cover;
     vertical-align: middle;
@@ -331,9 +350,8 @@ p {
 }
 
 .carousel-button {
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #ddd;
+    background-color: rgb(130,84,53);
+    border: 0 solid #ddd;
     padding: 5px 10px;
     font-size: 20px;
     cursor: pointer;
@@ -342,6 +360,8 @@ p {
     transform: translateY(-50%);
     z-index: 1;
     user-select: none;
+    border-radius: 100px;
+    color: white;
 }
 
 .carousel-button.left {
@@ -416,6 +436,7 @@ p {
 
 .about-us-textblock{
     text-align: justify;
+    font-weight: 500;
 }
 
 /* Блок по умолчанию (для широких экранов) */
@@ -423,18 +444,75 @@ p {
     display: flex; /* Показывать на широких экранах */
 }
 
-.info-blocks-small {
-    display: none; /* Скрыть на широких экранах */
+.brand-section {
+    width: 100%;
+    background-color: rgb(130,84,53); /* Replace with your brand color */
+    padding: 2rem 5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 0;
+    color: rgb(130,84,53);
 }
+
+.brand-block {
+    text-align: center;
+    margin: 1rem;
+    background-color: rgba(240, 242, 241, 0.9);
+    border-radius: 15px;
+    height: 15rem;
+    width: 30rem;
+    vertical-align: middle;
+    align-content: center;
+    padding: 0 1rem;
+}
+
+.brand-block img {
+    width: 20%;
+    height: auto;
+    margin: 1rem 1rem;
+}
+
+.brand-block h1 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: rgb(130,84,53);
+
+}
+
+.brand-block a{
+    color: rgb(130,84,53);
+    text-decoration: underline;
+}
+
+.brand-block p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+.map-section {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 0;
+}
+
 
 /* Медиазапрос для экранов шириной менее 860px */
 @media (max-width: 860px) {
     .info-blocks {
-        display: none; /* Скрыть стандартный блок */
+        height: 50vh;
     }
-
-    .info-blocks-small {
-        display: block; /* Показать альтернативный блок */
+    .info-block img{
+        height: 20%;
+    }
+    .info-block h3{
+        font-size: 1rem;
+    }
+    .info-block p{
+        font-size: 0.8rem;
     }
 }
 
@@ -484,19 +562,19 @@ p {
 
 
 
-@media (max-width: 1650px) {
+@media (min-width: 1000px) {
     .hero-text {
         position: absolute;
-        top: 80%;
-        left: 30%;
+        top: 70%;
+        left: 25%;
     }
 }
 
 @media (max-width: 768px) {
     .hero {
-        padding: 20px; /* Уменьшенные отступы */
+        padding-top: 4rem; /* Уменьшенные отступы */
         text-align: center; /* Центрирование текста */
-        height: 30vh;
+        height: 100vh;
     }
 
     .hero-text h1 {
@@ -511,4 +589,57 @@ p {
         top: 50%;
         left: 50%;
     }
+
+    .brand-section{
+        flex-direction: column;
+        padding: 2rem 1rem;
+    }
+    .brand-block{
+        width: 80%;
+    }
+
+    .d-inline-flex{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4bc074;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 1000;
+    width: auto;
+    height: auto;
+}
+
+.notification.error {
+    background-color: #e74c3c;
+}
+
+
+.nav-btn.active {
+    background-color: rgb(130,84,53); /* Change the background color for the active state */
+    color: #FFFFFF; /* Change the text color for the active state */
+}
+
+.btn-outline-primary{
+    color: #000;
+    border: 0 solid rgb(130,84,53);
+    border-radius: 0;
+    font-size: 1rem;
+    padding: 0.5rem;
+    font-weight: 550;
+}
+
+.btn-outline-primary:hover{
+    background-color: rgb(130,84,53);
+    color: #fff;
+    font-size: 1rem;
 }

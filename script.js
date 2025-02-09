@@ -1,6 +1,7 @@
+//сделать хедер белым или прозрачным в зависимости от прокрутки
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('main-header');
-    const hero = document.getElementById('hero');
+    const hero = document.getElementById('hero1');
 
     // Вычисляем высоту hero-секции (в пикселях)
     const heroHeight = hero.offsetHeight;
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//сделать слайдшоу на главной странице
 document.addEventListener('DOMContentLoaded', () => {
     const hero = document.getElementById('hero');
 
@@ -32,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Устанавливаем первую картинку
     hero.style.backgroundImage = `url(${images[currentIndex]})`;
+    hero.style.backgroundAttachment = 'fixed';
 
     // Функция переключения
     function changeBackground() {
@@ -45,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         img.onload = () => {
             hero.style.backgroundImage = `url(${nextImage})`;
+            hero.style.backgroundAttachment = 'fixed';
             currentIndex = nextIndex; // Присваиваем новый индекс
         };
     }
@@ -53,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(changeBackground, 5000);
 });
 
+//функция для переключения карусели
 function toggleCarousel(sectionId) {
     // Получаем все карусели
     const carousels = document.querySelectorAll('.carousel');
@@ -67,17 +72,13 @@ function toggleCarousel(sectionId) {
     });
 }
 
-const carousel = document.querySelector('.carousel-images');
+const carousels = document.querySelectorAll('.carousel-images');
 // Создание массива путей к изображениям
 const imagePathsOffice = Array.from({ length: 23 }, (_, index) => `./assets/office-photos/g-office-${index}.jpg`);
-const imagePathsKitchen = Array.from({ length: 1 }, (_, index) => `assets/kitchen-photos/g-kitchen-${index}.jpeg`);
+const imagePathsKitchen = Array.from({ length: 9 }, (_, index) => `assets/kitchen-photos/g-kitchen-${index}.jpeg`);
 const imagePathsHome = Array.from({ length: 25 }, (_, index) => `assets/living-photos/g-living-${index}.jpeg`);
-
-
-
 // Функция для случайной сортировки массива
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
-
 // Перемешиваем массив путей
 const shuffledImagesOffice = shuffleArray(imagePathsOffice);
 const shuffledImagesKitchen = shuffleArray(imagePathsKitchen);
@@ -101,22 +102,31 @@ carouselImagesContainerHome.innerHTML = shuffledImagesHome
     .join('');
 
 // Прокрутка влево
-function scrollCarouselLeft() {
-    carousel.scrollBy({
-        left: -carousel.offsetWidth / 2, // Прокрутка на половину ширины видимой области
+function scrollCarouselLeft(selectionID) {
+    carousels[selectionID].scrollBy({
+        left: -carousels[selectionID].offsetWidth / 2, // Прокрутка на половину ширины видимой области
         behavior: 'smooth' // Для анимированной прокрутки
     });
 }
 
 // Прокрутка вправо
-function scrollCarouselRight() {
-    carousel.scrollBy({
-        left: carousel.offsetWidth / 2,
+function scrollCarouselRight(selectionID) {
+    carousels[selectionID].scrollBy({
+        left: carousels[selectionID].offsetWidth / 2,
         behavior: 'smooth'
     });
 }
+// Добавляем обработчики событий для каждой карусели
+document.querySelectorAll('.carousel').forEach((carousel) => {
+    const leftButton = carousel.querySelector('.carousel-button.left');
+    const rightButton = carousel.querySelector('.carousel-button.right');
+    const imagesContainer = carousel.querySelector('.carousel-images');
 
-document.querySelectorAll('.nav-btn').forEach(link => {
+    leftButton.addEventListener('click', () => scrollCarouselLeft(imagesContainer));
+    rightButton.addEventListener('click', () => scrollCarouselRight(imagesContainer));
+});
+//прокрутка до секции что бы не вылезал хедер
+document.querySelectorAll('.nav-btn' || '.btn-outline-primary').forEach(link => {
     link.addEventListener('click', function (e) {
         e.preventDefault();
 
@@ -124,13 +134,13 @@ document.querySelectorAll('.nav-btn').forEach(link => {
         const targetElement = document.getElementById(targetId);
 
         if (targetElement) {
-            const headerHeight = document.querySelector('header').offsetHeight; // Высота хедера
+            const headerHeight = document.querySelector('header').offsetHeight + 18; // Высота хедера
             const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
             const offsetPosition = elementPosition - headerHeight;
 
             window.scrollTo({
                 top: offsetPosition,
-                behavior: 'smooth'
+                behavior: 'auto'
             });
         }
     });
@@ -147,35 +157,47 @@ burgerMenu.addEventListener('click', () => {
     navMenu.classList.toggle('hidden'); // Меняет класс с hidden на visible
 });
 
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-    e.preventDefault(); // Предотвращаем стандартное поведение формы (переход на другую страницу)
+function showNotification(message, isError = false) {
 
-    // Собираем данные формы
-    let formData = new FormData(this);
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.classList.toggle('error', isError);
+    notification.style.display = 'block';
 
-    // Отправляем данные с помощью fetch API
-    fetch("./send_email.php", {
-        method: "POST",
-        body: formData,
-    })
-        .then((response) => response.text()) // Получаем ответ от сервера (в формате текста)
-        .then((data) => {
-            // Отображаем сообщение об успехе или ошибке
-            let notification = document.getElementById("notification");
-            notification.style.display = "block";
-            notification.style.color = data.includes("Ваше сообщение успешно отправлено") ? "green" : "red";
-            notification.innerText = data;
+    setTimeout(() => {
+        notification.style.display = 'none';
+    }, 10000);
+}
 
-            // Очищаем форму, если данные успешно отправлены
-            if (data.includes("Ваше сообщение успешно отправлено")) {
-                document.getElementById("contactForm").reset();
-            }
-        })
-        .catch((error) => {
-            // Показываем сообщение об ошибке
-            let notification = document.getElementById("notification");
-            notification.style.display = "block";
-            notification.style.color = "red";
-            notification.innerText = "Ошибка отправки: " + error.message;
-        });
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+
+    if (status === 'success') {
+        showNotification('Your message is sent. We will contact You soon.');
+        urlParams.delete('status');
+        window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (status === 'error') {
+        showNotification('Произошла ошибка при отправке сообщения.', true);
+        urlParams.delete('status');
+        window.history.replaceState({}, document.title, window.location.pathname);
+
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-btn');
+
+    function setActiveLink() {
+        let index = sections.length;
+
+        while (--index && window.scrollY + 100 < sections[index].offsetTop) {}
+
+        navLinks.forEach((link) => link.classList.remove('active'));
+        navLinks[index].classList.add('active');
+    }
+
+    setActiveLink();
+    window.addEventListener('scroll', setActiveLink);
 });
