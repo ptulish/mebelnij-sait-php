@@ -181,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showNotification('Произошла ошибка при отправке сообщения.', true);
         urlParams.delete('status');
         window.history.replaceState({}, document.title, window.location.pathname);
-
     }
 });
 
